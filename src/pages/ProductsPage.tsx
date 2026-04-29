@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type ShoppingCartIconProps = {
   number: number;
 }
@@ -27,6 +29,8 @@ let productsListArray = [
 let shoppingCartArray = [];
 
 export function ProductsPage() {
+    let [productsList, ] = useState()
+
     return (<>
         <Header />
         <br/>
