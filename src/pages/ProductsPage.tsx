@@ -1,42 +1,47 @@
 import { useState } from "react";
 
 type ShoppingCartIconProps = {
-  number: number;
+    number: number;
 }
 
 type ProductCardProps = {
-    // name
-    // quantity
-    // price
+    name: string,
+    quantity: number,
+    price: number
 }
 
 type ProductsListProps = {
-    children: React.ReactNode;
+    products: Product[],
+    children?: React.ReactNode;
 }
 
-let productsListArray = [
-  { name: 'Nico', quantity: 1, price: 100000000000000 },
-  { name: 'Cyber Truck', quantity: 1, price: 80000 },
-  { name: 'Private Island', quantity: 1, price: 5000000 },
-  { name: 'Space Station', quantity: 1, price: 150000000000 },
-  { name: 'Golden Keyboard', quantity: 1, price: 2500 },
-  { name: 'Superyacht', quantity: 1, price: 300000000 },
-  { name: 'Vintage Wine', quantity: 1, price: 15000 },
-  { name: 'Mars Rover', quantity: 1, price: 2500000000 },
-  { name: 'Diamond Crown', quantity: 1, price: 12000000 },
-  { name: 'Teleporter Prototype', quantity: 1, price: 999999999999 }
+type Product = {
+    name: string,
+    quantity: number,
+    price: number
+}
+
+let productsListArray: Product[] = [
+    { name: 'Nico', quantity: 1, price: 100000000000000 },
+    { name: 'Cyber Truck', quantity: 10, price: 80000 },
+    { name: 'Private Island', quantity: 1, price: 5000000 },
+    { name: 'Space Station', quantity: 1, price: 150000000000 },
+    { name: 'Golden Keyboard', quantity: 5, price: 2500 },
+    { name: 'Superyacht', quantity: 1, price: 300000000 },
+    { name: 'Vintage Wine', quantity: 23, price: 15000 },
+    { name: 'Mars Rover', quantity: 6, price: 2500000000 },
+    { name: 'Diamond Crown', quantity: 14, price: 12000000 },
+    { name: 'Teleporter Prototype', quantity: 12, price: 999999999999 }
 ];
 let shoppingCartArray = [];
 
 export function ProductsPage() {
-    let [productsList, ] = useState()
+    let [productsList,] = useState()
 
     return (<>
         <Header />
-        <br/>
-        <ProductsList>
-            <ProductCard></ProductCard>
-        </ProductsList>
+        <br />
+        <ProductsList products={productsListArray} />
     </>)
 }
 
@@ -57,29 +62,36 @@ export function ShoppingCartIcon() {
 
 
 // Map productListArray items to ProductCard
-export function ProductsList({ children }: ProductsListProps) {
+export function ProductsList({ products, children }: ProductsListProps) {
     return (<>
-    PRODUCTS LIST
-        { children }
+        {
+            products.map(product => (
+                <ProductCard 
+                    name={product.name}
+                    quantity={product.quantity}
+                    price={product.price}
+                />
+            ))
+        }
     </>)
 }
 
-export function ProductCard () {
+
+export function ProductCard({name, quantity, price}: ProductCardProps) {
 
     function handleAddToCart() {
-        console.log('Added to cart')
-        shoppingCartArray.push( {
-            name: 'Nico',
-            quantity: '1',
-            price: '100000000000000'
-        } )
-        console.log(shoppingCartArray);
+
     }
 
     // AddToCart Button
-    return <button onClick={handleAddToCart}>
-        Add to Cart
-    </button>
+    return (<>
+        <div>{name}</div>
+        <div>{quantity}</div>
+        <div>{price}</div>
+        <button onClick={handleAddToCart}>
+            Add to Cart
+        </button>
+    </>)
 
 }
 
