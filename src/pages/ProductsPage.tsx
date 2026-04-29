@@ -1,13 +1,13 @@
 import { useState } from "react";
 
+let shoppingCartArray = [];
+
 type ShoppingCartIconProps = {
-    number: number;
+    cartLength: number;
 }
 
 type ProductCardProps = {
-    name: string,
-    quantity: number,
-    price: number
+    product: Product;
 }
 
 type ProductsListProps = {
@@ -33,11 +33,9 @@ let productsListArray: Product[] = [
     { name: 'Diamond Crown', quantity: 14, price: 12000000 },
     { name: 'Teleporter Prototype', quantity: 12, price: 999999999999 }
 ];
-let shoppingCartArray = [];
+
 
 export function ProductsPage() {
-    let [productsList,] = useState()
-
     return (<>
         <Header />
         <br />
@@ -47,10 +45,8 @@ export function ProductsPage() {
 
 export function Header() {
     return (
-        'HEADER'
-        // <ShoppingCartIcon>
 
-        // </ShoppingCartIcon>
+        <ShoppingCartIcon></ShoppingCartIcon >
     )
 }
 
@@ -62,42 +58,47 @@ export function ShoppingCartIcon() {
 
 
 // Map productListArray items to ProductCard
-export function ProductsList({ products, children }: ProductsListProps) {
-    return (<>
-        {
-            products.map(product => (
-                <ProductCard 
-                    name={product.name}
-                    quantity={product.quantity}
-                    price={product.price}
-                />
-            ))
-        }
-    </>)
+export function ProductsList({ }: ProductsListProps) {
+    return (
+        <div>
+            <h2>PRODUCTS LIST</h2>
+            {
+                productsListArray.map(product => (
+                    // We render a ProductCard for each item, passing the product data
+                    <ProductCard key={product.name} product={product} />
+                ))
+            }
+        </div>
+    )
 }
 
 
-export function ProductCard({name, quantity, price}: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
 
     function handleAddToCart() {
-
+        shoppingCartArray.push(product);
+        console.log(shoppingCartArray)
     }
 
     // AddToCart Button
-    return (<>
-        <div>{name}</div>
-        <div>{quantity}</div>
-        <div>{price}</div>
-        <button onClick={handleAddToCart}>
-            Add to Cart
-        </button>
-    </>)
+    return (
+        <div style={{ border: '1px solid black', padding: '1rem', margin: '1rem' }}>
+            <h3>{product.name}</h3>
+            <p>Price: ${product.price}</p>
+            <p>Qty Available: {product.quantity}</p>
+            <button onClick={handleAddToCart}>
+                Add to Cart
+            </button>
+        </div>
+    )
 
 }
 
 // Track number of products in cart -> How? -> Use State (Array) -> ShoppingCartState
 // Products Hardcoded in Array -> Properties of Products -> Name Quantity Price
 // When add product clicked what exactly happens -> retrieve the Product { Name Quantity Price } add to array # of products in array === number at the upper right of the shopping cart icon 
+
+
 
 
 
