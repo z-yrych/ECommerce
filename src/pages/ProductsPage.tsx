@@ -4,6 +4,7 @@ import { type Product } from "../types/types";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ProductsList } from "../components/ProductsList";
+import { CartContextProvider } from "../contexts/CartContextProvider";
 
 
 let productsListArray: Product[] = [
@@ -23,26 +24,19 @@ let productsListArray: Product[] = [
 
 // let shoppingCartArray: Product[] = [];
 
-type ShoppingCartContextType = {
-    cart: Product[];
-    addToCart: (item: Product) => void;
-}
-export const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
+
 
 export function ProductsPage() {
-    const [cart, setCart] = useState<Product[]>([]);
-
-    function addToCart(item: Product) {
-        // create new Array with spread, append item
-        setCart([...cart, item]);
-    }
+    
 
     return (
-        <ShoppingCartContext value={{ cart, addToCart }}>
-            <Header />
-            <ProductsList products={productsListArray} />
-            <Footer />
-        </ShoppingCartContext>
+    <>
+    <CartContextProvider>
+        <Header />
+        <ProductsList products={productsListArray} />
+        <Footer />
+    </CartContextProvider>
+    </>
     );
 }
 

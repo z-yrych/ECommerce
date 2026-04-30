@@ -1,16 +1,17 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { type ProductCardProps, type Product } from "../types/types";
 
-import { ShoppingCartContext } from "../pages/ProductsPage";
+import { useCartContext } from "../contexts/CartContextProvider";
+// import { ShoppingCartContext } from "../pages/ProductsPage";
 
 // probably use context for shoppingCartArray
 
 
-export function ProductCard({ product }: ProductCardProps) {
-    let context = useContext(ShoppingCartContext)
+export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
+    const context = useCartContext();
 
     function handleAddToCart() {
-        context?.addToCart(product)
+        context?.addToCart(product);
     }
 
     // AddToCart Button
@@ -25,4 +26,4 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
     )
 
-}
+})

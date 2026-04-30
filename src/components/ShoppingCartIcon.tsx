@@ -1,12 +1,13 @@
 import { type ShoppingCartIconProps } from "../types/types"
-import { ShoppingCartContext } from "../pages/ProductsPage"
 import { useContext } from "react";
+import { useCartContext } from "../contexts/CartContextProvider";
+
 
 export function ShoppingCartIcon() {
-    let context = useContext(ShoppingCartContext)
+    const context = useCartContext();
     return (
-        <>
-        { context?.cart.length }
-        </>
+        <div>
+            Cart: {context?.cart.length}
+        </div>
     )
 }
