@@ -1,3 +1,5 @@
 export function Footer() {
-    return
+    return (
+        <footer>bitis</footer>
+    )
 }

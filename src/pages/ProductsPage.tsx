@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 
 import { type Product } from "../types/types";
 import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 import { ProductsList } from "../components/ProductsList";
 
 
@@ -19,20 +20,31 @@ let productsListArray: Product[] = [
 ];
 
 
-export function ProductsPage() {
-    return (<>
-        <Header />
-        <br />
-        <ProductsList products={productsListArray} />
-    </>)
+
+// let shoppingCartArray: Product[] = [];
+
+type ShoppingCartContextType = {
+    cart: Product[];
+    addToCart: (item: Product) => void;
 }
+export const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
 
+export function ProductsPage() {
+    const [cart, setCart] = useState<Product[]>([]);
 
+    function addToCart(item: Product) {
+        // create new Array with spread, append item
+        setCart([...cart, item]);
+    }
 
-
-
-
-
+    return (
+        <ShoppingCartContext value={{ cart, addToCart }}>
+            <Header />
+            <ProductsList products={productsListArray} />
+            <Footer />
+        </ShoppingCartContext>
+    );
+}
 
 
 // Track number of products in cart -> How? -> Use State (Array) -> ShoppingCartState

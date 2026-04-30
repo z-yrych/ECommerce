@@ -1,15 +1,16 @@
+import { useContext } from "react";
 import { type ProductCardProps, type Product } from "../types/types";
 
+import { ShoppingCartContext } from "../pages/ProductsPage";
 
 // probably use context for shoppingCartArray
-let shoppingCartArray: Product[] = [];
 
 
 export function ProductCard({ product }: ProductCardProps) {
+    let context = useContext(ShoppingCartContext)
 
     function handleAddToCart() {
-        shoppingCartArray.push(product);
-        console.log(shoppingCartArray)
+        context?.addToCart(product)
     }
 
     // AddToCart Button
