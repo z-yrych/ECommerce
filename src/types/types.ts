@@ -1,6 +1,7 @@
 type ProductsListProps = {
     products: Product[],
-    children?: React.ReactNode;
+    children?: React.ReactNode,
+    onPress: (item: Product) => void
 }
 
 type Product = {
@@ -15,6 +16,7 @@ type ShoppingCartIconProps = {
 
 type ProductCardProps = {
     product: Product;
+    onPress: (item: Product) => void
 }
 
 export type { ProductsListProps, Product, ShoppingCartIconProps, ProductCardProps }

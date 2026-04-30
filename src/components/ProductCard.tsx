@@ -7,12 +7,7 @@ import { useCartContext } from "../contexts/CartContextProvider";
 // probably use context for shoppingCartArray
 
 
-export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
-    const context = useCartContext();
-
-    function handleAddToCart() {
-        context?.addToCart(product);
-    }
+export const ProductCard = React.memo(function ProductCard({ product, onPress }: ProductCardProps) {
 
     // AddToCart Button
     return (
@@ -20,7 +15,7 @@ export const ProductCard = React.memo(function ProductCard({ product }: ProductC
             <h3>{product.name}</h3>
             <p>Price: ${product.price}</p>
             <p>Qty Available: {product.quantity}</p>
-            <button onClick={handleAddToCart}>
+            <button onClick={() => onPress(product)}>
                 Add to Cart
             </button>
         </div>

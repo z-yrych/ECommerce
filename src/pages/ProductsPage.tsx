@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import React, { useState, createContext } from "react";
 
 import { type Product } from "../types/types";
 import { Header } from "../components/Header";
@@ -27,15 +27,19 @@ let productsListArray: Product[] = [
 
 
 export function ProductsPage() {
-    
+    const [cart, setCart] = useState<Product[]>([]);
+
+    const handleAddToCart = React.useCallback((item: Product) => {
+        setCart(prev => [...prev, item]); 
+    }, []);
 
     return (
     <>
-    <CartContextProvider>
+    <CartContextProvider cart={cart}>
         <Header />
-        <ProductsList products={productsListArray} />
-        <Footer />
+        <ProductsList products={productsListArray} onPress={handleAddToCart}/>
     </CartContextProvider>
+    <Footer />
     </>
     );
 }

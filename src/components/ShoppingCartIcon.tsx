@@ -4,10 +4,10 @@ import { useCartContext } from "../contexts/CartContextProvider";
 
 
 export function ShoppingCartIcon() {
-    const context = useCartContext();
+    let cart = useCartContext()
     return (
         <div>
-            Cart: {context?.cart.length}
+            Cart: {cart.length}
         </div>
     )
 }

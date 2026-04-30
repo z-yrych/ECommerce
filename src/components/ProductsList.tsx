@@ -3,14 +3,14 @@ import { type ProductsListProps } from "../types/types"
 import { ProductCard } from "./ProductCard"
 
 // Map productListArray items to ProductCard
-export const ProductsList = React.memo(function ProductsList({ products }: ProductsListProps) {
+export const ProductsList = React.memo(function ProductsList({ products, onPress }: ProductsListProps) {
     return (
         <div>
             <h2>PRODUCTS LIST</h2>
             {
                 products.map(product => (
                     // We render a ProductCard for each item, passing the product data
-                    <ProductCard key={product.name} product={product} />
+                    <ProductCard key={product.name} product={product} onPress={onPress}/>
                 ))
             }
         </div>

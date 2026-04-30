@@ -1,31 +1,22 @@
 import React, { useContext, useState } from "react";
 import { type Product } from "../types/types";
 
-type ShoppingCartContextType = {
-    cart: Product[];
-    addToCart: (item: Product) => void;
-}
+const ShoppingCartContext = React.createContext<Product[] | undefined>(undefined);
 
 type CartContextProviderProps = {
-    children?: React.ReactNode
+    children: React.ReactNode;
+    cart: Product[];
 }
 
-const ShoppingCartContext = React.createContext<ShoppingCartContextType | undefined>(undefined);
-
-export function CartContextProvider({children}: CartContextProviderProps) {
-    const [cart, setCart] = useState<Product[]>([]);
-
-    function addToCart(item: Product) {
-        setCart([...cart, item]);
-    }
-
+export function CartContextProvider({ children, cart }: CartContextProviderProps) {
     return (
-        <ShoppingCartContext value={{ cart, addToCart }}>
-            { children }
+        <ShoppingCartContext value={cart}>
+            {children}
         </ShoppingCartContext>
-    )
+    );
 }
 
 export function useCartContext() {
-    return (useContext(ShoppingCartContext));
+    const context = useContext(ShoppingCartContext);
+    return context; 
 }
