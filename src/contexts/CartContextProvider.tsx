@@ -1,22 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback, createContext } from "react";
 import { type Product } from "../types/types";
 
-const ShoppingCartContext = React.createContext<Product[] | undefined>(undefined);
+const CartStateContext = createContext<Product[] | undefined>(undefined);
+const CartActionsContext = createContext<((item: Product) => void) | undefined>(undefined);
 
-type CartContextProviderProps = {
-    children: React.ReactNode;
-    cart: Product[];
-}
+export function CartContextProvider({ children }: { children: React.ReactNode }) {
+    const [cart, setCart] = useState<Product[]>([]);
 
-export function CartContextProvider({ children, cart }: CartContextProviderProps) {
+    const addToCart = useCallback((item: Product) => {
+        setCart((prev) => [...prev, item]);
+    }, []);
+
     return (
-        <ShoppingCartContext value={cart}>
-            {children}
-        </ShoppingCartContext>
+        <CartStateContext value={cart}>
+            <CartActionsContext value={addToCart}>
+                {children}
+            </CartActionsContext>
+        </CartStateContext>
     );
 }
 
-export function useCartContext() {
-    const context = useContext(ShoppingCartContext);
-    return context; 
+export function useCart() {
+    const context = useContext(CartStateContext);
+    if (context === undefined) throw new Error("useCart must be used within CartContextProvider");
+    return context;
+}
+
+export function useAddToCart() {
+    const context = useContext(CartActionsContext);
+    if (context === undefined) throw new Error("useAddToCart must be used within CartContextProvider");
+    return context;
 }
