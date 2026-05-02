@@ -50,16 +50,3 @@ export function ProductsPage() {
 // Track number of products in cart -> How? -> Use State (Array) -> ShoppingCartState
 // Products Hardcoded in Array -> Properties of Products -> Name Quantity Price
 // When add product clicked what exactly happens -> retrieve the Product { Name Quantity Price } add to array # of products in array === number at the upper right of the shopping cart icon 
-
-
-
-
-
-
-
-
-
-
-
-
-
