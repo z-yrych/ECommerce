@@ -18,6 +18,10 @@ export type ProductCardProps = {
     product: Product;
 }
 
+export type ProductListProps = {
+    product: Product;
+}
+
 export type CartItem = {
     product: Product
     qtyInCart: number;
