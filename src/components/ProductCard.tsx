@@ -2,9 +2,6 @@ import React, { useContext } from "react";
 import { type ProductCardProps, type Product } from "../types/types";
 
 import { useAddToCart } from "../contexts/CartContextProvider";
-// import { ShoppingCartContext } from "../pages/ProductsPage";
-
-// probably use context for shoppingCartArray
 
 
 export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {

@@ -7,21 +7,18 @@ import { ProductsList } from "../components/ProductsList";
 import { CartContextProvider } from "../contexts/CartContextProvider";
 import { CartList } from "../components/CartList";
 
-// let shoppingCartArray: Product[] = [];
-
-
 export function ProductsPage() {
     return (
-    <>
-    <CartContextProvider>
-        <Header />
-        <div className="shop-container">
-            <ProductsList />
-            <CartList />
-        </div>
-    </CartContextProvider>
-    <Footer />
-    </>
+        <>
+            <CartContextProvider>
+                <Header />
+                <div className="shop-container">
+                    <ProductsList />
+                    <CartList />
+                </div>
+            </CartContextProvider>
+            <Footer />
+        </>
     );
 }
 

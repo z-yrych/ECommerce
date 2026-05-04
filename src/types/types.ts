@@ -1,21 +1,24 @@
-type ProductsListProps = {
+export type ProductsListProps = {
     children?: React.ReactNode,
     // onPress: (item: Product) => void
 }
 
-type Product = {
+export type Product = {
+    id: number,
     name: string,
     quantity: number,
     price: number
 }
 
-type ShoppingCartIconProps = {
+export type ShoppingCartIconProps = {
     cartLength: number;
 }
 
-type ProductCardProps = {
+export type ProductCardProps = {
     product: Product;
-    // onPress: (item: Product) => void
 }
 
-export type { ProductsListProps, Product, ShoppingCartIconProps, ProductCardProps }
+export type CartItem = {
+    product: Product
+    qtyInCart: number;
+}

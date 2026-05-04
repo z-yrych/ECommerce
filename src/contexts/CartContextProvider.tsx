@@ -1,17 +1,29 @@
 import React, { useContext, useState, useCallback, createContext } from "react";
-import { type Product } from "../types/types";
+import { type Product, type CartItem } from "../types/types";
 
-const CartStateContext = createContext<Product[] | undefined>(undefined);
+
+const CartStateContext = createContext<CartItem[] | undefined>(undefined);
+
 const CartActionsContext = createContext<((item: Product) => void) | undefined>(undefined);
 
 export function CartContextProvider({ children }: { children: React.ReactNode }) {
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
 
     const addToCart = useCallback((item: Product) => {
-        setCart((prev) => [...prev, item]);
+        setCart((prev) => {
+            const existing = prev.find(c => c.product.id === item.id);
+            if (existing) {
+                return prev.map(c =>
+                    c.product.id === item.id
+                        ? { ...c, qtyInCart: c.qtyInCart + 1 }
+                        : c
+                );
+            }
+            return [...prev, { product: item, qtyInCart: 1 }];
+        });
     }, []);
 
-    return (
+    return (                                  // ← this was missing            
         <CartStateContext value={cart}>
             <CartActionsContext value={addToCart}>
                 {children}
@@ -19,6 +31,8 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
         </CartStateContext>
     );
 }
+
+// Are these 2 context splitting?
 
 export function useCart() {
     const context = useContext(CartStateContext);

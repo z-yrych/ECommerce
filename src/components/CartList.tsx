@@ -7,21 +7,21 @@ export function CartList() {
     return (
         <div>
             <h2>Your Shopping Cart</h2>
-            
+
             {cart.length === 0 ? (
                 <p>Your cart is empty. Go buy some Space Stations.</p>
             ) : (
                 <ul>
                     {cart.map((item, index) => (
                         <li key={index}>
-                            {item.name} - ${item.price.toLocaleString()}
+                            {item.product.name} - ${item.product.price.toLocaleString()} - QtyInCart {item.qtyInCart}
                         </li>
                     ))}
                 </ul>
             )}
-            
+
             <hr />
-            <h3>Total: ${cart.reduce((sum, item) => sum + item.price, 0).toLocaleString()}</h3>
+            <h3>Total: ${cart.reduce((sum, item) => sum + item.product.price, 0).toLocaleString()}</h3>
         </div>
     );
 }
