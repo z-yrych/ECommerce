@@ -1,9 +1,10 @@
 // components/CartModal.tsx
 import { useCart } from "../contexts/CartContextProvider";
+import { CartItem } from "./CartItem";
 
 export function CartList() {
     const cart = useCart();
-
+    console.log(cart);
     return (
         <div>
             <h2>Your Shopping Cart</h2>
@@ -12,17 +13,15 @@ export function CartList() {
                 <p>Your cart is empty. Go buy some Space Stations.</p>
             ) : (
                 <ul>
-                    {cart.map((item, index) => (
-                        <li key={index}>
-                            {item.name} - ${item.price.toLocaleString()}
-                        </li>
+                    {cart.map(item => (
+                        <CartItem key={item.product.id} product={item.product} quantityInCart={item.quantityInCart}></CartItem>
                     ))}
                 </ul>
             )}
             
             <hr />
-            <h3>Total: ${cart.reduce((sum, item) => sum + item.price, 0).toLocaleString()}</h3>
+            {/* add total for each */}
+            <h3>Total: ${cart.reduce((sum, item) => sum + item.product.price, 0).toLocaleString()}</h3>
         </div>
     );
 }
-

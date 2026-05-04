@@ -1,14 +1,31 @@
 import React, { useContext, useState, useCallback, createContext } from "react";
-import { type Product } from "../types/types";
+import { type Product, type CartItem } from "../types/types";
 
-const CartStateContext = createContext<Product[] | undefined>(undefined);
+const CartStateContext = createContext<CartItem[] | undefined>(undefined);
+
 const CartActionsContext = createContext<((item: Product) => void) | undefined>(undefined);
 
 export function CartContextProvider({ children }: { children: React.ReactNode }) {
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
 
     const addToCart = useCallback((item: Product) => {
-        setCart((prev) => [...prev, item]);
+        
+        setCart((prev) => {
+            const existingItem = prev.find(i => i.product.id === item.id);
+
+            if (existingItem) {
+                console.log('dupe found');
+                return prev.map(i => {
+                    if (i.product.id === item.id) {
+                        return { ...i, quantityInCart: (i.quantityInCart ?? 0) + 1 };
+                    } else {
+                        return i;
+                    }
+                });
+            }
+
+            return [...prev, { product: item, quantityInCart: 1 }];
+        });
     }, []);
 
     return (

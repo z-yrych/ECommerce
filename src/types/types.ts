@@ -4,6 +4,7 @@ type ProductsListProps = {
 }
 
 type Product = {
+    id: number,
     name: string,
     quantity: number,
     price: number
@@ -18,4 +19,9 @@ type ProductCardProps = {
     // onPress: (item: Product) => void
 }
 
-export type { ProductsListProps, Product, ShoppingCartIconProps, ProductCardProps }
+type CartItem = {
+    product: Product;
+    quantityInCart?: number;
+}
+
+export type { ProductsListProps, Product, ShoppingCartIconProps, ProductCardProps, CartItem }
