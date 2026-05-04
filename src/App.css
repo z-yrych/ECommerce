@@ -182,3 +182,20 @@
     border-right-color: var(--border);
   }
 }
+
+.shop-container {
+  display: flex;
+  flex-direction: row; /* Side-by-side */
+  gap: 40px;           /* Space between the two lists */
+  padding: 20px;
+  align-items: flex-start; /* Prevents one list from stretching to match the other's height */
+
+  /* Match your existing responsive logic */
+ */
+}
+
+/* Optional: Make them share the space equally */
+.shop-container > * {
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing their container */
+}

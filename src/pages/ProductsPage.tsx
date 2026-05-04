@@ -5,6 +5,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ProductsList } from "../components/ProductsList";
 import { CartContextProvider } from "../contexts/CartContextProvider";
+import { CartList } from "../components/CartList";
 
 // let shoppingCartArray: Product[] = [];
 
@@ -14,7 +15,10 @@ export function ProductsPage() {
     <>
     <CartContextProvider>
         <Header />
-        <ProductsList />
+        <div className="shop-container">
+            <ProductsList />
+            <CartList />
+        </div>
     </CartContextProvider>
     <Footer />
     </>
