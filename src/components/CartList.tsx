@@ -1,10 +1,10 @@
 // components/CartModal.tsx
-import { useAddToCart, useCart } from "../contexts/CartContextProvider";
+import { useCartActions, useCart } from "../contexts/CartContextProvider";
 
 
 export function CartList() {
     const cart = useCart();
-    const addToCart = useAddToCart()
+    const { addToCart, removeFromCart } = useCartActions();
     console.log(cart)
     return (
         <div>
@@ -26,7 +26,7 @@ export function CartList() {
                                 <strong>Line Total:</strong> ${(item.product.price *
                                     item.qtyInCart)}
                             </li>
-                            <button>-</button>
+                            <button onClick={() => removeFromCart(item.product)}>-</button>
                             <button onClick={() => addToCart(item.product)}>+</button>
                         </div>
                     ))}
