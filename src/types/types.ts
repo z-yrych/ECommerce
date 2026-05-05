@@ -22,7 +22,7 @@ export type ProductListProps = {
     product: Product;
 }
 
-export type CartItem = {
+export type CartItemType = {
     product: Product
     qtyInCart: number;
 }

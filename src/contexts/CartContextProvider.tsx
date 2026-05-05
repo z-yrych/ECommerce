@@ -1,7 +1,7 @@
 import React, { useContext, useState, useCallback, createContext, useMemo } from "react";
-import { type Product, type CartItem } from "../types/types";
+import { type Product, type CartItemType } from "../types/types";
 
-const CartStateContext = createContext<CartItem[] | undefined>(undefined);
+const CartStateContext = createContext<CartItemType[] | undefined>(undefined);
 // const CartActionsContext = createContext<((item: Product) => void) | undefined>(undefined);
 
 type CartActions = {
@@ -15,7 +15,7 @@ const CartActionsContext = createContext<CartActions | undefined>(undefined);
 
 
 export function CartContextProvider({ children }: { children: React.ReactNode }) {
-    const [cart, setCart] = useState<CartItem[]>([]);
+    const [cart, setCart] = useState<CartItemType[]>([]);
 
     const addToCart = useCallback((item: Product) => {
         setCart((prev) => {

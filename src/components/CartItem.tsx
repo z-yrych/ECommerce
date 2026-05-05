@@ -1,10 +1,11 @@
 // components/CartItem.tsx
 import { useCartActions } from "../contexts/CartContextProvider";
-import type { CartItem } from "../types/types";
+import React from "react";
+import type { CartItemType } from "../types/types";
 
 
 
-export function CartItem({ product, qtyInCart }: CartItem) {
+export const CartItem = React.memo(function CartItem({ product, qtyInCart }: CartItemType) {
     // const cart = useCart();
     const { addToCart, removeFromCart } = useCartActions();
 
@@ -25,4 +26,4 @@ export function CartItem({ product, qtyInCart }: CartItem) {
         </div>
     </>)
 
-}
+})
