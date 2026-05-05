@@ -34,14 +34,19 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
     const removeFromCart = useCallback((item: Product) => {
         setCart((prev) => {
             const existing = prev.find(c => c.product.id === item.id);
-            if (existing) { // add check for if qtyInCart === 0
-                return prev.map(c =>
-                    c.product.id === item.id
-                        ? { ...c, qtyInCart: c.qtyInCart - 1 }
-                        : c
-                );
+
+            if (existing) {
+                if (existing.qtyInCart > 1) {
+                    return prev.map(c =>
+                        c.product.id === item.id
+                            ? { ...c, qtyInCart: c.qtyInCart - 1 }
+                            : c
+                    );
+                } 
+                
+                return prev.filter(c => c.product.id !== item.id);
             }
-            return [...prev];
+            return prev;
         });
     }, []);
 
