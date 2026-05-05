@@ -6,7 +6,7 @@ import { useCartActions, useCart } from "../contexts/CartContextProvider";
 
 
 
-export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
+export const ProductCard = React.memo(function ProductCard({ product, qtyInCart }: ProductCardProps) {
     const { addToCart, removeFromCart } = useCartActions();
 
     // const cart = useCart();
@@ -22,7 +22,7 @@ export const ProductCard = React.memo(function ProductCard({ product }: ProductC
         <div style={{ border: '1px solid black', padding: '1rem', margin: '1rem' }}>
             <h3>{product.name}</h3>
             <p>Price: ${product.price}</p>
-            <p>Qty Available: {product.quantity}</p>
+            <p>Qty in Cart: {qtyInCart}</p>
             <button onClick={onAddToCart}>
                 Add to Cart
             </button>

@@ -1,6 +1,7 @@
 // components/ProductsList.tsx
 import { ProductCard } from "./ProductCard"
 import { type Product } from "../types/types";
+import { useCart } from "../contexts/CartContextProvider";
 
 let productsListArray: Product[] = [
     { id: 1, name: 'Notebook', quantity: 50, price: 45 },
@@ -18,14 +19,24 @@ let productsListArray: Product[] = [
 // What scenario or feature would make sense wherein ProductsList cares about what's in the cart
 export function ProductsList() {
     let products = productsListArray
+    let cart = useCart();
+
     return (
         <div>
             <h2>PRODUCTS LIST</h2>
             {
-                products.map(product => (
-                    <ProductCard key={product.name} product={product} />
-                ))
+                products.map(product => {
+                    let cartItem = cart.find(item => item.product.id === product.id)
+                    let qtyInCart = cartItem?.qtyInCart
+                    return (
+                        <ProductCard key={product.name} product={product} qtyInCart={qtyInCart} />
+                    )
+                }
+                )
+
+
             }
         </div>
     )
 }
+
