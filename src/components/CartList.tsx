@@ -1,10 +1,11 @@
-// components/CartModal.tsx
+// components/CartList.tsx
 import { useCartActions, useCart } from "../contexts/CartContextProvider";
+import { CartItem } from "./CartItem";
 
 
 export function CartList() {
     const cart = useCart();
-    const { addToCart, removeFromCart } = useCartActions();
+    // const { addToCart, removeFromCart } = useCartActions();
     console.log(cart)
     return (
         <div>
@@ -15,20 +16,7 @@ export function CartList() {
             ) : (
                 <ul>
                     {cart.map((item) => (
-                        <div key={item.product.id}>
-                            <li>
-                                <strong>Item:</strong> {item.product.name}
-                                <br />
-                                <strong>Unit Price</strong> ${item.product.price}
-                                <br />
-                                <strong>Qty In Cart</strong> {item.qtyInCart}
-                                <br />
-                                <strong>Line Total:</strong> ${(item.product.price *
-                                    item.qtyInCart)}
-                            </li>
-                            <button onClick={() => removeFromCart(item.product)}>-</button>
-                            <button onClick={() => addToCart(item.product)}>+</button>
-                        </div>
+                        <CartItem key={item.product.id} product={item.product} qtyInCart={item.qtyInCart}/>
                     ))}
                 </ul>
             )}
