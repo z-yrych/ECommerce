@@ -1,12 +1,11 @@
 // components/CartItem.tsx
 import { useCartActions } from "../contexts/CartContextProvider";
 import React, { useCallback } from "react";
-import type { CartItemType } from "../types/types";
-import { CartItemDetails } from "./CartItemDetails";
+import type { CartItemProps } from "../types/types";
 
 
 
-export const CartItem = React.memo(function CartItem({ product, qtyInCart }: CartItemType) {
+export const CartItem = React.memo(function CartItem({ product, qtyInCart }: CartItemProps) {
     // const cart = useCart();
     const { addToCart, removeFromCart } = useCartActions();
 
