@@ -1,8 +1,11 @@
-import { useCart } from "../contexts/CartContextProvider";
 import { CartItem } from "./CartItem";
 
+import { useAtom } from "jotai";
+import { cartAtom } from "../atoms/cartAtom";
+
 export function CartList() {
-    const cart = useCart();
+    const [cart] = useAtom(cartAtom);
+    console.log(cart)
     const activeItems = cart.filter((item) => item.qtyInCart > 0);
     const total = cart.reduce((sum, item) => sum + item.product.price * item.qtyInCart, 0);
 
@@ -14,6 +17,7 @@ export function CartList() {
                 <p className="cart-empty">Your cart is empty.</p>
             ) : (
                 <ul className="cart-items-list">
+                    cool
                     {activeItems.map((item) => (
                         <CartItem key={item.product.id} product={item.product} qtyInCart={item.qtyInCart} />
                     ))}

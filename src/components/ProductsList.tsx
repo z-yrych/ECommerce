@@ -1,6 +1,8 @@
 import { ProductCard } from "./ProductCard"
 import { type Product } from "../types/types";
-import { useCart } from "../contexts/CartContextProvider";
+
+import { useAtom } from "jotai";
+import { cartAtom } from "../atoms/cartAtom";
 
 let productsListArray: Product[] = [
     { id: 1, name: 'Notebook', quantity: 50, price: 45 },
@@ -17,17 +19,15 @@ let productsListArray: Product[] = [
 
 export function ProductsList() {
     let products = productsListArray;
-    let cart = useCart();
+    let cart = useAtom(cartAtom);
 
     return (
         <div className="products-section">
             <h2 className="section-title">Products</h2>
             <div className="products-grid">
                 {products.map(product => {
-                    let cartItem = cart.find(item => item.product.id === product.id);
-                    let qtyInCart = cartItem?.qtyInCart;
                     return (
-                        <ProductCard key={product.id} product={product} qtyInCart={qtyInCart} />
+                        <ProductCard key={product.id} product={product} qtyInCart={1} />
                     );
                 })}
             </div>

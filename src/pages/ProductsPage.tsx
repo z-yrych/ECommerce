@@ -4,19 +4,16 @@ import { type Product } from "../types/types";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ProductsList } from "../components/ProductsList";
-import { CartContextProvider } from "../contexts/CartContextProvider";
 import { CartList } from "../components/CartList";
 
 export function ProductsPage() {
     return (
         <>
-            <CartContextProvider>
                 <Header />
                 <div className="shop-container">
                     <ProductsList />
                     <CartList />
                 </div>
-            </CartContextProvider>
             <Footer />
         </>
     );

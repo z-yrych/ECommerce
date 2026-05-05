@@ -28,6 +28,11 @@ export type CartItemProps = {
     qtyInCart: number;
 }
 
-export type CartItemNewProps = {
-    product: Product;
+export type CartItem = {
+    product: Product
+    qtyInCart: number;
 }
+
+// export type CartItemNewProps = {
+//     product: Product;
+// }

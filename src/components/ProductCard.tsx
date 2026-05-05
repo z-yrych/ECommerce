@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import { type ProductCardProps } from "../types/types";
-import { useCartActions } from "../contexts/CartContextProvider";
+
+import { useCart } from "../hooks/useCart";
 
 export const ProductCard = React.memo(function ProductCard({ product, qtyInCart }: ProductCardProps) {
-    const { addToCart, removeFromCart } = useCartActions();
+    const { addToCart, removeFromCart } = useCart();
 
     const onAddToCart = useCallback(() => { addToCart(product); }, [addToCart, product]);
     const onRemoveFromCart = useCallback(() => { removeFromCart(product); }, [removeFromCart, product]);
