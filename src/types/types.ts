@@ -16,13 +16,14 @@ export type ShoppingCartIconProps = {
 
 export type ProductCardProps = {
     product: Product;
+    qtyInCart: number | undefined;  
 }
 
 export type ProductListProps = {
     product: Product;
 }
 
-export type CartItemType = {
+export type CartItemProps = {
     product: Product
     qtyInCart: number;
 }
