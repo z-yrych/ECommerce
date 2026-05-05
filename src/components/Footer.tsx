@@ -1,8 +1,9 @@
-// components/Footer.tsx
 import React from "react";
 
 export const Footer = React.memo(function Footer() {
     return (
-        <footer>bitis</footer>
-    )
-})
+        <footer className="footer">
+            &copy; {new Date().getFullYear()} ZyRICH Store. All rights reserved.
+        </footer>
+    );
+});

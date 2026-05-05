@@ -1,34 +1,25 @@
-// components/ProductCard.tsx
-import React, { useContext, useCallback } from "react";
-import { type ProductCardProps, type Product } from "../types/types";
-
-import { useCartActions, useCart } from "../contexts/CartContextProvider";
-
-
+import React, { useCallback } from "react";
+import { type ProductCardProps } from "../types/types";
+import { useCartActions } from "../contexts/CartContextProvider";
 
 export const ProductCard = React.memo(function ProductCard({ product, qtyInCart }: ProductCardProps) {
     const { addToCart, removeFromCart } = useCartActions();
 
-    // const cart = useCart();
-    // console.log(cart);
+    const onAddToCart = useCallback(() => { addToCart(product); }, [addToCart, product]);
+    const onRemoveFromCart = useCallback(() => { removeFromCart(product); }, [removeFromCart, product]);
 
-    // useCallback 
-
-    let onAddToCart = useCallback(() => { addToCart(product) }, [addToCart, product]);
-    let onRemoveFromCart = useCallback(() => { removeFromCart(product) }, [addToCart, product]);
-
-    // AddToCart Button
     return (
-        <div style={{ border: '1px solid black', padding: '1rem', margin: '1rem' }}>
-            <h3>{product.name}</h3>
-            <p>Price: ${product.price}</p>
-            <p>Qty in Cart: {qtyInCart}</p>
-            <button onClick={onAddToCart}>
-                Add to Cart
-            </button>
-            <button onClick={onRemoveFromCart}>-</button>
-            <button onClick={onAddToCart}>+</button>
+        <div className="product-card">
+            <h3 className="product-name">{product.name}</h3>
+            <p className="product-price">${product.price.toLocaleString()}</p>
+            {qtyInCart !== undefined && qtyInCart > 0 && (
+                <span className="qty-in-cart">{qtyInCart} in cart</span>
+            )}
+            <div className="product-actions">
+                <button className="btn-primary" onClick={onAddToCart}>Add to Cart</button>
+                <button className="btn-icon" onClick={onRemoveFromCart}>−</button>
+                <button className="btn-icon" onClick={onAddToCart}>+</button>
+            </div>
         </div>
-    )
-
-})
+    );
+});

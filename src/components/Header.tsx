@@ -1,16 +1,15 @@
-// components/Header.tsx
-// import { useState } from "react";
 import { useCart } from "../contexts/CartContextProvider";
 
 export function Header() {
     const cart = useCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.qtyInCart, 0);
 
     return (
-        <header style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid #ccc' }}>
-            <h1>ZyRICH Store</h1>
-            
-            <button style={{ cursor: 'pointer' }}>
-                🛒 Cart ({cart.length})
+        <header className="header">
+            <h1 className="header-logo">ZyRICH Store</h1>
+            <button className="cart-btn">
+                🛒 Cart
+                {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
             </button>
         </header>
     );

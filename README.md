@@ -4,3 +4,6 @@ All child components can use context (useCart and useAddToCart) as a reference b
 
 How does CartList component get access to products array defined in ProductsList.tsx? by calling useCart? -> how does useCart get access to products array? by context = useContext(CartStateContext) -> How does this (context = useContext(CartStateContext)) gets access to the products array? Whats the flow?
 
+TO IMPLEMENT: 
+1. CLEAR LINE ITEM FROM CART PLACE IN PRODUCT CARD
+2. CLEAR CART PLACE IN CART LIST
