@@ -2,6 +2,7 @@
 import { useCartActions } from "../contexts/CartContextProvider";
 import React, { useCallback } from "react";
 import type { CartItemProps } from "../types/types";
+import { CartItemCount } from "./CartItemCount";
 
 
 
