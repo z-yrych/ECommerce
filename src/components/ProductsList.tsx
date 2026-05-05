@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { type ProductsListProps } from "../types/types"
+// components/ProductsList.tsx
 import { ProductCard } from "./ProductCard"
 import { type Product } from "../types/types";
 

@@ -1,3 +1,4 @@
+// components/CartItem.tsx
 import { useCartActions } from "../contexts/CartContextProvider";
 import type { CartItem } from "../types/types";
 
