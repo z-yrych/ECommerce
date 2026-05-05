@@ -6,7 +6,8 @@ import { useCartActions, useCart } from "../contexts/CartContextProvider";
 
 
 export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
-    const { addToCart } = useCartActions();
+    const { addToCart, removeFromCart } = useCartActions();
+
     // const cart = useCart();
     // console.log(cart);
 
@@ -19,6 +20,8 @@ export const ProductCard = React.memo(function ProductCard({ product }: ProductC
             <button onClick={() => addToCart(product)}>
                 Add to Cart
             </button>
+            <button onClick={() => removeFromCart(product)}>-</button>
+            <button onClick={() => addToCart(product)}>+</button>
         </div>
     )
 

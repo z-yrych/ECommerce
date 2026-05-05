@@ -29,7 +29,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
             }
             return [...prev, { product: item, qtyInCart: 1 }];
         });
-    }, []);
+    }, []); // investigate add setCart in dependency array
 
     const removeFromCart = useCallback((item: Product) => {
         setCart((prev) => {
@@ -51,7 +51,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
         // clearCart: () => setCart([])
     }), [addToCart, removeFromCart]);
 
-    return (                                  // ← this was missing            
+    return (
         <CartStateContext value={cart}>
             <CartActionsContext value={actions}>
                 {children}
