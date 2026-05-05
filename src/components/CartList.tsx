@@ -2,7 +2,6 @@
 import { useCartActions, useCart } from "../contexts/CartContextProvider";
 import { CartItem } from "./CartItem";
 
-
 export function CartList() {
     const cart = useCart();
     // const { addToCart, removeFromCart } = useCartActions();
@@ -18,7 +17,7 @@ export function CartList() {
                     {cart
                         .filter((item) => (item.qtyInCart > 0))
                         .map((item) => (
-                        <CartItem key={item.product.id} product={item.product} qtyInCart={item.qtyInCart}/>
+                        <CartItem key={item.product.id} product={item.product}/>
                     ))}
                 </ul>
             )}

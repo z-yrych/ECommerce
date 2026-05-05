@@ -2,11 +2,14 @@
 import { useCartActions } from "../contexts/CartContextProvider";
 import React, { useCallback } from "react";
 import type { CartItemType } from "../types/types";
-import { CartItemDetails } from "./CartItemDetails";
+// import { CartItemDetails } from "./CartItemDetails";
+import { CartItemCount } from "./CartItemCount";
+
+import { type CartItemNewProps } from "../types/types";
 
 
 
-export const CartItem = React.memo(function CartItem({ product, qtyInCart }: CartItemType) {
+export const CartItem = React.memo(function CartItem({ product }: CartItemNewProps) {
     // const cart = useCart();
     const { addToCart, removeFromCart } = useCartActions();
 
@@ -20,10 +23,7 @@ export const CartItem = React.memo(function CartItem({ product, qtyInCart }: Car
                 <br />
                 <strong>Unit Price</strong> ${product.price}
                 <br />
-                <strong>Qty In Cart</strong> {qtyInCart}
-                <br />
-                <strong>Line Total:</strong> ${(product.price *
-                    qtyInCart)}
+                <CartItemCount productId={product.id} />
             </li>
             <button onClick={onRemoveFromCart}>-</button>
             <button onClick={onAddToCart}>+</button>

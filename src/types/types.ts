@@ -26,3 +26,7 @@ export type CartItemType = {
     product: Product
     qtyInCart: number;
 }
+
+export type CartItemNewProps = {
+    product: Product;
+}
