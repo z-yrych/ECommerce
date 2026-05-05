@@ -78,3 +78,24 @@ export function useCartActions() {
     if (context === undefined) throw new Error("useAddToCart must be used within CartContextProvider");
     return context;
 }
+
+// export function useQtyInCart() {
+//     const context = useContext(CartStateContext);
+//     if (context === undefined) throw new Error("useCart must be used within CartContextProvider");
+//     return context;
+// } TODO: INVESTIGATE WHY ADDING ANOTHER SPLIT WOULD CAUSE THE COMPONENTS TO RE-RENDER.
+// WHAT IF THE COMPONENT THAT WILL SUBSCRIBE TO THE CONTEXT SPLIT IS PRODUCTS LIST (VS PRODUCTCARD)
+
+// Investigate this -> 
+// same issue with calling useCart() directly so we there's no approach where we can use adding another split to the CartContextProvider that provides access  
+//   to qtyincart?                                                                                                                                               
+                                                                                                                                                              
+// ⏺ Correct. That's the fundamental limitation of React context — it doesn't support selectors out of the box. Any change to the context value re-renders all   
+//   consumers, regardless of how you split it.                                                      
+
+//   So you're back to two realistic options:                                                                                                                    
+   
+//   1. Prop approach — parent reads cart, passes qtyInCart as a number prop, React.memo handles optimization                                                    
+//   2. Accept the re-renders — ProductCard reads useCart() directly, get the feature working, optimization is a later problem
+                                                                                                                                                              
+//   For a product list of typical size, option 2 is honestly fine. Re-rendering a few extra cards isn't noticeable.  
