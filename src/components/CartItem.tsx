@@ -1,13 +1,17 @@
 // components/CartItem.tsx
 import { useCartActions } from "../contexts/CartContextProvider";
-import React from "react";
+import React, { useCallback } from "react";
 import type { CartItemType } from "../types/types";
+import { CartItemDetails } from "./CartItemDetails";
 
 
 
 export const CartItem = React.memo(function CartItem({ product, qtyInCart }: CartItemType) {
     // const cart = useCart();
     const { addToCart, removeFromCart } = useCartActions();
+
+    let onAddToCart = useCallback(() => { addToCart(product) }, [addToCart, product]);
+    let onRemoveFromCart = useCallback(() => { removeFromCart(product) }, [addToCart, product]);
 
     return (<>
         <div key={product.id}>
@@ -21,8 +25,8 @@ export const CartItem = React.memo(function CartItem({ product, qtyInCart }: Car
                 <strong>Line Total:</strong> ${(product.price *
                     qtyInCart)}
             </li>
-            <button onClick={() => removeFromCart(product)}>-</button>
-            <button onClick={() => addToCart(product)}>+</button>
+            <button onClick={onRemoveFromCart}>-</button>
+            <button onClick={onAddToCart}>+</button>
         </div>
     </>)
 
