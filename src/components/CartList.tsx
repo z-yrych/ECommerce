@@ -15,7 +15,9 @@ export function CartList() {
                 <p>Your cart is empty. Go buy some Space Stations.</p>
             ) : (
                 <ul>
-                    {cart.map((item) => (
+                    {cart
+                        .filter((item) => (item.qtyInCart > 0))
+                        .map((item) => (
                         <CartItem key={item.product.id} product={item.product} qtyInCart={item.qtyInCart}/>
                     ))}
                 </ul>
