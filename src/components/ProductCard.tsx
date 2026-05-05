@@ -15,6 +15,7 @@ export const ProductCard = React.memo(function ProductCard({ product }: ProductC
     // useCallback 
 
     let onAddToCart = useCallback(() => { addToCart(product) }, [addToCart, product]);
+    let onRemoveFromCart = useCallback(() => { removeFromCart(product) }, [addToCart, product]);
 
     // AddToCart Button
     return (
@@ -25,8 +26,8 @@ export const ProductCard = React.memo(function ProductCard({ product }: ProductC
             <button onClick={onAddToCart}>
                 Add to Cart
             </button>
-            <button onClick={() => removeFromCart(product)}>-</button>
-            <button onClick={() => addToCart(product)}>+</button>
+            <button onClick={onRemoveFromCart}>-</button>
+            <button onClick={onAddToCart}>+</button>
         </div>
     )
 
