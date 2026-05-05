@@ -41,7 +41,7 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
                         : c
                 );
             }
-            return [...prev, { product: item, qtyInCart: 1 }];
+            return [...prev];
         });
     }, []);
 
