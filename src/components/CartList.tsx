@@ -5,7 +5,7 @@ import { cartAtom } from "../atoms/cartAtom";
 
 export function CartList() {
     const [cart] = useAtom(cartAtom);
-    console.log(cart)
+
     const activeItems = cart.filter((item) => item.qtyInCart > 0);
     const total = cart.reduce((sum, item) => sum + item.product.price * item.qtyInCart, 0);
 
@@ -19,7 +19,7 @@ export function CartList() {
                 <ul className="cart-items-list">
                     cool
                     {activeItems.map((item) => (
-                        <CartItem key={item.product.id} product={item.product} qtyInCart={item.qtyInCart} />
+                        <CartItem key={item.product.id} product={item.product} />
                     ))}
                 </ul>
             )}

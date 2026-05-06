@@ -1,17 +1,15 @@
-import { useAtom } from "jotai";
-import { cartAtom } from "../atoms/cartAtom";
+import { useAtom, atom, useAtomValue } from "jotai";
+import { cartAtom, qtyInCartAtom, itemQtyAtomFamily } from "../atoms/cartAtom";
 
 type CartItemCountProps = {
     productId: number
 }
 
 export function CartItemCount({ productId }: CartItemCountProps) {
-    const cart = useAtom(cartAtom);
-    console.log(cart);
-    // // const cartItem = cart.find(c => c.product.id === productId);
-    // console.log(cartItem)
-    // if (!cartItem) return null;
+    const qtyInCart = useAtomValue(itemQtyAtomFamily(productId));
+    console.log(qtyInCart);
 
     return (<>
+    <span className="qty-in-cart">In Cart: {qtyInCart}</span>
     </>)
 }

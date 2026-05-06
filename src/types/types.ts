@@ -25,7 +25,7 @@ export type ProductListProps = {
 
 export type CartItemProps = {
     product: Product
-    qtyInCart: number;
+    // qtyInCart: number;
 }
 
 export type CartItem = {

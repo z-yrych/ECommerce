@@ -1,10 +1,14 @@
 import React, { useCallback } from "react";
 import { type ProductCardProps } from "../types/types";
 
-import { useCart } from "../hooks/useCart";
+import { useSetAtom } from "jotai";
+import { addToCartAtom, removeFromCartAtom } from "../atoms/cartAtom";
 
-export const ProductCard = React.memo(function ProductCard({ product, qtyInCart }: ProductCardProps) {
-    const { addToCart, removeFromCart } = useCart();
+import { CartItemCount } from "./CartItemCount";
+
+export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
+    const addToCart = useSetAtom(addToCartAtom);
+    const removeFromCart = useSetAtom(removeFromCartAtom);
 
     const onAddToCart = useCallback(() => { addToCart(product); }, [addToCart, product]);
     const onRemoveFromCart = useCallback(() => { removeFromCart(product); }, [removeFromCart, product]);
@@ -13,9 +17,7 @@ export const ProductCard = React.memo(function ProductCard({ product, qtyInCart 
         <div className="product-card">
             <h3 className="product-name">{product.name}</h3>
             <p className="product-price">${product.price.toLocaleString()}</p>
-            {qtyInCart !== undefined && qtyInCart > 0 && (
-                <span className="qty-in-cart">{qtyInCart} in cart</span>
-            )}
+            <CartItemCount productId={product.id} />
             <div className="product-actions">
                 <button className="btn-primary" onClick={onAddToCart}>Add to Cart</button>
                 <button className="btn-icon" onClick={onRemoveFromCart}>−</button>
